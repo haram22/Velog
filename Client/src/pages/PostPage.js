@@ -13,28 +13,34 @@ import axios from 'axios';
 // id가 있으면 update
 // id가 없으면 post
 
-
 export default function PostPage() {
   const { id } = useParams();
   const editData = dummyData.find((item) => item.id === parseInt(id));
   let navigate = useNavigate();
   
   const [detailData, setData] = useState([]); // 데이터를 저장할 상태
-  const [title, setTitle] = useState(detailData ? detailData.title : "");
-  const [mdinfo, setMD] = useState(detailData ? detailData.content : "");
+  const [title, setTitle] = useState(editData ? editData.content : "");
+  const [mdinfo, setMD] = useState(detailData.content);
 
   useEffect(() => {
-    // 서버에서 데이터를 가져오는 비동기 요청
-    axios
-      .get(`http://localhost:8080/api/articles/get/${id}`)
-      .then((response) => {
-        // 가져온 데이터를 상태(State)에 저장
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("데이터를 가져오는 중 오류 발생:", error);
-      });
-  }, []);
+    if (id) {
+      // id가 있을 경우, 서버에서 데이터를 불러온 후 상태 업데이트
+      axios.get(`http://localhost:8080/api/articles/get/${id}`)
+        .then((response) => {
+          setData(response.data); // 전체 데이터 저장
+          setTitle(response.data.title); // title 상태 업데이트
+          setMD(response.data.content); // content(mdinfo) 상태 업데이트
+        })
+        .catch((error) => {
+          console.error("데이터를 가져오는 중 오류 발생:", error);
+        });
+    } else {
+      // id가 없을 경우, 빈 데이터로 상태 초기화
+      // setData(null);
+      setTitle("");
+      setMD("");
+    }
+  }, [id]); 
 
   function CancelButtonClicked() {
     navigate("/Home");
@@ -57,7 +63,7 @@ export default function PostPage() {
         }).catch(function (error) {
             console.log(error);
         });
-  }
+  };
 
   function UpdateButtonClicked() {
     axios
@@ -71,7 +77,7 @@ export default function PostPage() {
       .catch(function (error) {
         console.log(error);
       });
-  }
+  };
   
   return (
     <Container>
