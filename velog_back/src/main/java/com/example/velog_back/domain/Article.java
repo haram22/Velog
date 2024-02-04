@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @NoArgsConstructor
@@ -23,7 +24,8 @@ public class Article extends BaseTime{
     private int viewCount;
     @Column
     private int commentCount;
-
+    @Column(length = 30)
+    private String author;
     public Long getId() {
         return articleId;
     }

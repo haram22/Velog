@@ -44,7 +44,10 @@ public class ArticleController {
     public void deleteArticles(@PathVariable Long id) {
         articleService.deleteArticle(id);
     }
-}
 
-// ram test
-// last
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Void> updateArticle(@PathVariable Long id, @RequestBody ArticleRequestDto requestDto){
+        articleService.updateArticle(id, requestDto);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+}

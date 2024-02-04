@@ -55,6 +55,7 @@ public class ArticleService {
         responseDto.setContent(article.getContent());
         responseDto.setCommentCount(article.getCommentCount());
         responseDto.setViewCount(article.getViewCount());
+        responseDto.setAuthor(article.getAuthor());
         responseDto.setCreatedAt(String.valueOf(article.getCreatedAt()));
         responseDto.setUpdatedAt(String.valueOf(article.getModifiedAt()));
         return responseDto;
@@ -64,6 +65,14 @@ public class ArticleService {
         articleRepository.deleteById(id);
     }
 
+    public void updateArticle(long id, ArticleRequestDto articleRequestDto) {
+        Article article = articleRepository.getReferenceById(id);
 
+        article.setTitle(articleRequestDto.getTitle());
+        article.setContent(articleRequestDto.getContent());
 
+        articleRepository.save(article);
+    }
 }
+
+

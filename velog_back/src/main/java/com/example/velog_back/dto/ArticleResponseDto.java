@@ -13,4 +13,5 @@ public class ArticleResponseDto {
     private String updatedAt;
     private int commentCount;
     private int viewCount;
+    private String author = "ram";
 }
