@@ -2,7 +2,7 @@ import React from "react";
 import theme from "../styles/theme";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -12,11 +12,25 @@ import axios from 'axios';
 export default function PostPage() {
   const { id } = useParams();
   const editData = dummyData.find((item) => item.id === parseInt(id));
-
-  const [title, setTitle] = useState(editData ? editData.title : "");
-  const [mdinfo, setMD] = useState(editData ? editData.content : "");
   let navigate = useNavigate();
   
+  const [detailData, setData] = useState([]); // 데이터를 저장할 상태
+  const [title, setTitle] = useState(detailData ? detailData.title : "");
+  const [mdinfo, setMD] = useState(detailData ? detailData.content : "");
+
+  useEffect(() => {
+    // 서버에서 데이터를 가져오는 비동기 요청
+    axios
+      .get(`http://localhost:8080/api/articles/get/${id}`)
+      .then((response) => {
+        // 가져온 데이터를 상태(State)에 저장
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오는 중 오류 발생:", error);
+      });
+  }, []);
+
   function CancelButtonClicked() {
     navigate("/Home");
   }
@@ -40,6 +54,20 @@ export default function PostPage() {
         });
   }
 
+  function UpdateButtonClicked() {
+    axios
+      .patch(`http://localhost:8080/api/articles/update/${id}`, {
+            title: title,
+            content: mdinfo
+      })
+      .then(function (response) {
+        navigate("/Home");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  
   return (
     <Container>
       <StyledInput

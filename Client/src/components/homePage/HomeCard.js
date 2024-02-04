@@ -2,7 +2,7 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 // import dummyData from "../../data/Dummy.json";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -17,7 +17,8 @@ export default function HomeCard({ data }) {
 
   useEffect(() => {
     // 서버에서 데이터를 가져오는 비동기 요청
-    axios.get("http://localhost:8080/api/articles/get")
+    axios
+      .get("http://localhost:8080/api/articles/get")
       .then((response) => {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);
@@ -25,7 +26,7 @@ export default function HomeCard({ data }) {
       .catch((error) => {
         console.error("데이터를 가져오는 중 오류 발생:", error);
       });
-  }, []); 
+  }, []);
 
   return (
     <CardsContainer>
@@ -42,7 +43,7 @@ export default function HomeCard({ data }) {
             </DateStyle>
           </ContentContainer>
           <BottomContainer>
-            {/* <p>by {item.author}</p> */}
+            <p>by {item.author}</p>
             <Spacer />
             <FavoriteIcon
               sx={{
@@ -63,12 +64,12 @@ export default function HomeCard({ data }) {
 const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 30px; 
-  justify-content: flex-start; 
+  gap: 30px;
+  justify-content: flex-start;
   align-items: flex-start;
 
   > div {
-    transition: transform 0.5s; 
+    transition: transform 0.5s;
     &:hover {
       transform: translateY(-13px);
     }

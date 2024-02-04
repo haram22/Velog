@@ -6,8 +6,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useRef } from "react";
 import DetailLogo from "../../assets/detail_logo.svg";
-// import dummyData from "../../data/Dummy.json"
 import { useParams } from 'react-router-dom';
+import axios from "axios";
 
 export default function Header() {
   let navigate = useNavigate();
@@ -42,12 +42,25 @@ export default function Header() {
   }, [ref]);
 
   const { id } = useParams();
+  const [detailData, setData] = useState([]); // 데이터를 저장할 상태
+
+  useEffect(() => {
+    // 서버에서 데이터를 가져오는 비동기 요청
+    axios
+      .get(`http://localhost:8080/api/articles/get/${id}`)
+      .then((response) => {
+        // 가져온 데이터를 상태(State)에 저장
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("데이터를 가져오는 중 오류 발생:", error);
+      });
+  }, []);
 
   return (
     <HeaderContainer style={{ marginLeft: "40px", paddingLeft: "90px" }}>
       <img src={DetailLogo} width={30} paddingRight={10} alt="Logo" onClick={LogoClicked}/>
-      {/* <div style={{fontSize: "21px", fontWeight: "700", paddingTop: "10px", paddingLeft: "15px", left: "10px"}}>{detailData.author}</div> */}
-      <div style={{fontSize: "21px", fontWeight: "700", paddingTop: "10px", paddingLeft: "15px", left: "10px"}}>author</div>
+      <div style={{fontSize: "21px", fontWeight: "700", paddingTop: "10px", paddingLeft: "15px", left: "10px"}}>{detailData.author}</div>
       <Spacer />
       <NightlightIcon
         sx={{ fontSize: "30px", color: "white", paddingTop: "5px" }}

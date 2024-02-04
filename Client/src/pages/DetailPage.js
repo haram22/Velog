@@ -25,24 +25,26 @@ export default function DetailPage() {
 
   useEffect(() => {
     // 서버에서 데이터를 가져오는 비동기 요청
-    axios.get(`http://localhost:8080/api/articles/get/${id}`)
+    axios
+      .get(`http://localhost:8080/api/articles/get/${id}`)
       .then((response) => {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);
-        
       })
       .catch((error) => {
         console.error("데이터를 가져오는 중 오류 발생:", error);
       });
-  }, []); 
+  }, []);
 
   function DeleteButtonClicked() {
-    axios.delete(`http://localhost:8080/api/articles/delete/${id}`, {
-        }).then(function (response) {
-          navigate("/Home");
-        }).catch(function (error) {
-            console.log(error);
-        });
+    axios
+      .delete(`http://localhost:8080/api/articles/delete/${id}`, {})
+      .then(function (response) {
+        navigate("/home");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -55,8 +57,7 @@ export default function DetailPage() {
 
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h4>
-              {/* {detailData.author} */}
-               · {detailData.createdAt}
+              {/* {detailData.author} */}· {detailData.createdAt}
             </h4>
             <Spacer />
             {/* <FollowButton>팔로우</FollowButton> */}
