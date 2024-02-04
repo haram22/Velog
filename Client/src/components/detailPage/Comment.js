@@ -3,12 +3,9 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-// import dummyData from "../../data/Dummy.json";
 
 export default function Comment() {
   const { id } = useParams();
-  // const commentData = dummyData.find((item) => item.id === parseInt(id));
-
   const [inputValue, setInputValue] = useState("");
   const placeholderText = "댓글을 작성하세요";
   const handleInputChange = (event) => {

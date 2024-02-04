@@ -10,13 +10,11 @@ import AuthorInfo from "../components/detailPage/AuthorInfo";
 import Comment from "../components/detailPage/Comment";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from '../config';
 
 export default function DetailPage() {
   const navigate = useNavigate();
-
   const { id } = useParams();
-  // const detailData = dummyData.find((item) => item.id === parseInt(id));
-
   const goToEditPage = (id) => {
     navigate(`/PostPage/${id}`);
   };
@@ -26,7 +24,7 @@ export default function DetailPage() {
   useEffect(() => {
     // 서버에서 데이터를 가져오는 비동기 요청
     axios
-      .get(`http://localhost:8080/api/articles/get/${id}`)
+      .get(`${API_BASE_URL}/get/${id}`)
       .then((response) => {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);
@@ -38,7 +36,7 @@ export default function DetailPage() {
 
   function DeleteButtonClicked() {
     axios
-      .delete(`http://localhost:8080/api/articles/delete/${id}`, {})
+      .delete(`${API_BASE_URL}/delete/${id}`, {})
       .then(function (response) {
         navigate("/home");
       })

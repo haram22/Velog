@@ -5,6 +5,7 @@ import theme from "../../styles/theme";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from '../../config';
 
 export default function AuthorInfo() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function AuthorInfo() {
   useEffect(() => {
     // 서버에서 데이터를 가져오는 비동기 요청
     axios
-      .get(`http://localhost:8080/api/articles/get/${id}`)
+      .get(`${API_BASE_URL}/get/${id}`)
       .then((response) => {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);

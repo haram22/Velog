@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import dummyData from "../data/Dummy.json";
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 // id 기준
 // id가 있으면 update
@@ -25,7 +26,7 @@ export default function PostPage() {
   useEffect(() => {
     if (id) {
       // id가 있을 경우, 서버에서 데이터를 불러온 후 상태 업데이트
-      axios.get(`http://localhost:8080/api/articles/get/${id}`)
+      axios.get(`${API_BASE_URL}/get/${id}`)
         .then((response) => {
           setData(response.data); // 전체 데이터 저장
           setTitle(response.data.title); // title 상태 업데이트
@@ -36,7 +37,6 @@ export default function PostPage() {
         });
     } else {
       // id가 없을 경우, 빈 데이터로 상태 초기화
-      // setData(null);
       setTitle("");
       setMD("");
     }
@@ -55,7 +55,7 @@ export default function PostPage() {
   };
 
   function PublishButtonClicked(){
-    axios.post("http://localhost:8080/api/articles/create", {
+    axios.post(`${API_BASE_URL}/create`, {
             title: title,
             content: mdinfo
         }).then(function (response) {
@@ -67,7 +67,7 @@ export default function PostPage() {
 
   function UpdateButtonClicked() {
     axios
-      .patch(`http://localhost:8080/api/articles/update/${id}`, {
+      .patch(`${API_BASE_URL}/update/${id}`, {
             title: title,
             content: mdinfo
       })

@@ -2,14 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import theme from "../../styles/theme";
-import dummyData from "../../data/Dummy.json";
 import ShareIcon from '@mui/icons-material/Share';
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 export default function Floating() {
   const { id } = useParams();
-  // const detailData = dummyData.find((item) => item.id === parseInt(id));
   const [detailData, setData] = useState([]); // 데이터를 저장할 상태
 
   const [likesCount, setLikesCount] = useState(detailData.viewCount);

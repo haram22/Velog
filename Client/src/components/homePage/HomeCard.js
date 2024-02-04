@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-// import dummyData from "../../data/Dummy.json";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from '../../config';
 
 export default function HomeCard({ data }) {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function HomeCard({ data }) {
   useEffect(() => {
     // 서버에서 데이터를 가져오는 비동기 요청
     axios
-      .get("http://localhost:8080/api/articles/get")
+      .get(`${API_BASE_URL}/get`)
       .then((response) => {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);

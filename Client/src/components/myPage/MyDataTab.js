@@ -2,11 +2,11 @@ import React from "react";
 import theme from "../../styles/theme";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-// import dummyData from "../../data/Dummy.json";
 import { useNavigate } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from '../../config';
 
 export default function MyDataTab() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function MyDataTab() {
 
   useEffect(() => {
     // 서버에서 데이터를 가져오는 비동기 요청
-    axios.get("http://localhost:8080/api/articles/get")
+    axios.get(`${API_BASE_URL}/get`)
       .then((response) => {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);
