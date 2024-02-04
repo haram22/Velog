@@ -57,7 +57,7 @@ export default function DetailPage() {
 
           <div style={{ display: "flex", flexDirection: "row" }}>
             <h4>
-              {/* {detailData.author} */}· {detailData.createdAt}
+              {detailData.author}· {detailData.createdAt}
             </h4>
             <Spacer />
             {/* <FollowButton>팔로우</FollowButton> */}

@@ -19,13 +19,13 @@ export default function Header2() {
         />
         <div style={{ paddingTop: "8px", paddingLeft: "5px"}}>트렌딩</div>
       </TabBarButton>
-      <TabBarButton borderColor="transparent">
+      <TabBarButton colorborder="transparent">
         <AccessTimeIcon
           sx={{ fontSize: "24px", color: "white", paddingTop: "5px", paddingLeft: "10px"}}
         />
         <div style={{ paddingTop: "8px", paddingLeft: "5px" }}>최신</div>
       </TabBarButton>
-      <TabBarButton borderColor="transparent">
+      <TabBarButton colorborder="transparent">
         <RssFeedIcon
           sx={{ fontSize: "24px", color: "white", paddingTop: "5px" }}
         />
@@ -70,7 +70,7 @@ const TabBarButton = styled.button`
   color: ${theme.colors.white1};
   border-color: transparent;
   border-bottom: 2px solid
-    ${(props) => props.borderColor || theme.colors.white1};
+    ${(props) => props.colorborder || theme.colors.white1};
   width: 90px;
   font-size: 16px;
   font-weight: 700;
