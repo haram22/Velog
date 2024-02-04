@@ -9,6 +9,11 @@ import { useParams } from "react-router-dom";
 import dummyData from "../data/Dummy.json";
 import axios from 'axios';
 
+// id 기준
+// id가 있으면 update
+// id가 없으면 post
+
+
 export default function PostPage() {
   const { id } = useParams();
   const editData = dummyData.find((item) => item.id === parseInt(id));
@@ -106,7 +111,7 @@ export default function PostPage() {
               </CancelButton>
               <Spacer />
               <SubSaveButton>임시저장</SubSaveButton>
-              <SaveButton onClick={PublishButtonClicked}>출간하기</SaveButton>
+              <SaveButton onClick={id>0 ? UpdateButtonClicked : PublishButtonClicked}>출간하기</SaveButton>
             </div>
           </BottomContainer>
         </div>
