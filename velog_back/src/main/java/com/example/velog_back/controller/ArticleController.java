@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/articles")
+//@CrossOrigin(origins = "https://velogram.netlify.app/")
 public class ArticleController {
 
     private final ArticleService articleService;
