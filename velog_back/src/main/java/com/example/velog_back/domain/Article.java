@@ -25,6 +25,7 @@ public class Article extends BaseTime{
     @Column
     private int commentCount;
     @Column(length = 30)
+    @ColumnDefault("haram")
     private String author;
     public Long getId() {
         return articleId;
