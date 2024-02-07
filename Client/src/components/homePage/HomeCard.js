@@ -23,8 +23,8 @@ export default function HomeCard({ data }) {
         // 가져온 데이터를 상태(State)에 저장
         setData(response.data);
       })
-      .catch((error) => {
-        console.error("데이터를 가져오는 중 오류 발생:", error);
+      .catch((error) => { 
+        console.error("데이터를 가져오는 중 오류 발생:ㅜ", error);
       });
   }, []);
 
